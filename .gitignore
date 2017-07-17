@@ -1,0 +1,6 @@
+# Visual Studio Code Configuration Files
+.vscode/
+
+# Python
+*.pyc
+
