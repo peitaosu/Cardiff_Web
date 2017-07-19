@@ -1,4 +1,5 @@
 from django.http import HttpResponse
+from django.shortcuts import render
 
 import os, sys, inspect, StringIO
 current_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -24,3 +25,7 @@ def response_console_output(func):
 @response_console_output
 def info(request):
     cardiff.exec_cmd(["info"])
+
+def about(request):
+    context = cardiff.settings["information"]
+    return render(request, 'about.html', context)
