@@ -20,5 +20,6 @@ from . import view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^info', view.info),
-    url(r'^about', view.about)
+    url(r'^about', view.about),
+    url(r'^repo', view.repo)
 ]

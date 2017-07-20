@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Repository - Cardiff Web</title>
+    <style media="screen" type="text/css">
+        .repo_table {
+            margin-top:15px;
+            border-collapse:collapse;
+            border:1px solid #aaa;
+        	}
+        .repo_table td {
+            vertical-align:text-top;
+            padding:6px 15px 6px 6px;
+            border:1px solid #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Repository</h1>
+
+    <h2>Current Repository</h2>
+    <p>{{ current_repo }}</p>
+
+    <h2>Current Branch</h2>
+    <p>{{ current_branch }}</p>
+
+    <h2>Commit Logs</h2>
+    <table class="repo_table" border="1">
+        <tr>
+            <td>Hash</td>
+            <td>Message</td>
+        </tr>
+        {% for log_item in commit_logs %}
+        <tr>
+            <td>{{ log_item.1 }}</td>
+            <td>{{ log_item.4 }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+</body>
+
+</html>

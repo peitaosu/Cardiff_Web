@@ -29,3 +29,11 @@ def info(request):
 def about(request):
     context = cardiff.settings["information"]
     return render(request, 'about.html', context)
+
+def repo(request):
+    context = {}
+    vcs = cardiff.setup_vcs()
+    context["current_repo"] = cardiff.settings["repo"]
+    context["current_branch"] = cardiff.vcs_current_branch
+    context["commit_logs"] = cardiff.vcs.log()
+    return render(request, 'repo.html', context)
