@@ -2,25 +2,15 @@
 <html>
 
 <head>
-    <title>About Cardiff</title>
-    <style media="screen" type="text/css">
-        .info_table {
-            margin-top:15px;
-            border-collapse:collapse;
-            border:1px solid #aaa;
-        	}
-        .info_table td {
-            vertical-align:text-top;
-            padding:6px 15px 6px 6px;
-            border:1px solid #aaa;
-        }
-    </style>
+    <title>About - Cardiff Web</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
 </head>
 
 <body>
-    <h1>About Cardiff</h1>
+    <h1>About Cardiff Web</h1>
 
-    <table class="info_table" border="1">
+    <table class="c_table" border="1">
         <tr>
             <td>Contributor</td>
             <td>{{contributor}}</td>

@@ -3,18 +3,8 @@
 
 <head>
     <title>Repository - Cardiff Web</title>
-    <style media="screen" type="text/css">
-        .repo_table {
-            margin-top:15px;
-            border-collapse:collapse;
-            border:1px solid #aaa;
-        	}
-        .repo_table td {
-            vertical-align:text-top;
-            padding:6px 15px 6px 6px;
-            border:1px solid #aaa;
-        }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
 </head>
 
 <body>
@@ -27,7 +17,7 @@
     <p>{{ current_branch }}</p>
 
     <h2>Commit Logs</h2>
-    <table class="repo_table" border="1">
+    <table class="c_table" border="1">
         <tr>
             <td>Hash</td>
             <td>Message</td>
