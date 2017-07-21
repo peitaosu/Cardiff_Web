@@ -54,3 +54,8 @@ table.c_table pre {
 table.c_table p {
     margin:0 0 2px 0;
 }
+
+table.c_table tr.normal td{
+	background-color:#F5F5F5;
+    color: initial;
+}
