@@ -18,6 +18,7 @@ from django.contrib import admin
 from . import view
 
 urlpatterns = [
+    url(r'^$', view.about),
     url(r'^info', view.info),
     url(r'^about', view.about),
     url(r'^repo', view.repo)
