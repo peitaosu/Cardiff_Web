@@ -40,6 +40,12 @@ def about(request):
     return render(request, 'about.html', context)
 
 def repo(request):
+    if "init" in request.GET:
+        if "username" in request.GET:
+            cardiff.settings["user.name"] = request.GET["username"]
+        if "useremail" in request.GET:
+            cardiff.settings["user.email"] = request.GET["useremail"]
+        cardiff.exec_cmd(["init", request.GET["init"]])
     context = {}
     vcs = cardiff.setup_vcs()
     context["current_repo"] = cardiff.settings["repo"]
