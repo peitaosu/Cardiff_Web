@@ -26,6 +26,15 @@ def response_console_output(func):
 def info(request):
     cardiff.exec_cmd(["info"])
 
+@response_console_output
+def init(request):
+    if "username" in request.GET:
+        cardiff.settings["user.name"] = request.GET["username"]
+    if "useremail" in request.GET:
+        cardiff.settings["user.email"] = request.GET["useremail"]
+    if "repo" in request.GET:
+        cardiff.exec_cmd(["init", request.GET["repo"]])
+
 def about(request):
     context = cardiff.settings["information"]
     return render(request, 'about.html', context)
