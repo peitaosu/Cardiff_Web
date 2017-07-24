@@ -12,6 +12,24 @@ cardiff = Cardiff()
 cardiff_settings_path = os.path.join(cardiff_path, "settings.json")
 cardiff.load_settings(cardiff_settings_path)
 
+def is_set(value):
+    if value.startswith("<") and value.endswith(">"):
+        return False
+    else:
+        return True
+
+def index(request):
+    if not is_set(cardiff.settings["repo"]):
+        if not is_set(cardiff.settings["user.name"]):
+            pass
+            #TODO set user.name
+        if not is_set(cardiff.settings["user.email"]):
+            pass
+            #TODO set user.email
+        #TODO: init repo
+        pass
+    else:
+        return repo(request)
 
 def response_console_output(func):
     def new_func(*args, **kwargs):
@@ -19,7 +37,7 @@ def response_console_output(func):
         sys.stdout = console_output
         func(*args, **kwargs)
         sys.stdout = sys.__stdout__
-        return HttpResponse(['<BR>' if char == '\n' else char for char in console_output.getvalue()])
+        return HttpResponse(["<BR>" if char == "\n" else char for char in console_output.getvalue()])
     return new_func
 
 @response_console_output
@@ -37,7 +55,7 @@ def init(request):
 
 def about(request):
     context = cardiff.settings["information"]
-    return render(request, 'about.html', context)
+    return render(request, "about.html", context)
 
 def repo(request):
     if "init" in request.GET:
@@ -51,4 +69,4 @@ def repo(request):
     context["current_repo"] = cardiff.settings["repo"]
     context["current_branch"] = cardiff.vcs_current_branch
     context["commit_logs"] = cardiff.vcs.log()
-    return render(request, 'repo.html', context)
+    return render(request, "repo.html", context)
