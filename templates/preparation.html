@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Preparation - Cardiff Web</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
+    <link rel="shortcut icon" href={% static "cardiff.png" %}/>
+</head>
+
+<body>
+    <h1>Cardiff Web Preparation</h1>
+    <form action="/init" method="get">
+        {% if repo_set == False %}
+        <input type="text" name="repo" placeholder="Repository"/>
+        {% endif %}
+        {% if name_set == False %}
+        <input type="text" name="username" placeholder="User Name"/>
+        {% endif %}
+        {% if email_set == False %}
+        <input type="text" name="useremail" placeholder="User Email"/>
+        {% endif %}
+        <input type="submit" value="Setup"/>
+    </form>
+</body>
+
+</html>

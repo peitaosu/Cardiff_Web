@@ -19,15 +19,14 @@ def is_set(value):
         return True
 
 def index(request):
+    context = {}
     if not is_set(cardiff.settings["repo"]):
+        context["repo_set"] = False
         if not is_set(cardiff.settings["user.name"]):
-            pass
-            #TODO set user.name
+            context["name_set"] = False
         if not is_set(cardiff.settings["user.email"]):
-            pass
-            #TODO set user.email
-        #TODO: init repo
-        pass
+            context["email_set"] = False
+        return render(request, "preparation.html", context)
     else:
         return repo(request)
 
