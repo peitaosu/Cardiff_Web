@@ -8,20 +8,25 @@
     <link rel="shortcut icon" href={% static "cardiff.png" %}/>
 </head>
 
-<body>
-    <h1>Cardiff Web Preparation</h1>
-    <form action="/init" method="get">
-        {% if repo_set == False %}
-        <input type="text" name="repo" placeholder="Repository"/>
-        {% endif %}
-        {% if name_set == False %}
-        <input type="text" name="username" placeholder="User Name"/>
-        {% endif %}
-        {% if email_set == False %}
-        <input type="text" name="useremail" placeholder="User Email"/>
-        {% endif %}
-        <input type="submit" value="Setup"/>
-    </form>
+<body style="width: 980px;">
+    <div id="prepare_intro">
+        <h1>Preparation</h1>
+        <p>Looks you are using Cardiff first time, please initial your first repository with your name and email.</p>
+    </div>
+    <div id="prepare_form">
+        <form id="prepare" action="/init" method="get">
+            {% if repo_set == False %}
+            <input type="text" name="repo" placeholder="Repository"/>
+            {% endif %}
+            {% if name_set == False %}
+            <input type="text" name="username" placeholder="User Name"/>
+            {% endif %}
+            {% if email_set == False %}
+            <input type="text" name="useremail" placeholder="User Email"/>
+            {% endif %}
+            <input type="submit" value="Setup"/>
+        </form>
+    </div>
 </body>
 
 </html>

@@ -1,6 +1,5 @@
 body {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
-    width: 80%;
     margin: auto;
 }
 
@@ -58,4 +57,27 @@ table.c_table p {
 table.c_table tr.normal td{
 	background-color:#F5F5F5;
     color: initial;
+}
+
+#prepare_intro {
+    float: left;
+    width: 100%;
+}
+#prepare_intro h1 {
+    text-align: left;
+}
+#prepare_form {
+    float: left;
+    margin-top: 24px;
+    width: 100%;
+}
+#prepare_form form input {
+    font-size: 18px;
+    padding: 6px;
+}
+#prepare_form form input[type=submit] {
+    border: none;
+    height: 36px;
+    width: 120px;
+    font-size: 18px;
 }
