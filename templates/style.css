@@ -83,3 +83,9 @@ table.c_table tr.normal td{
     width: 120px;
     font-size: 18px;
 }
+
+.header {
+    width: 100%;
+    height: 48px;
+    background-color: #666
+}
