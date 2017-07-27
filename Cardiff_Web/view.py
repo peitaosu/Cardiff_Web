@@ -50,7 +50,7 @@ def init(request):
     if "useremail" in request.GET:
         cardiff.settings["user.email"] = request.GET["useremail"]
     if "repo" in request.GET:
-        cardiff.exec_cmd(["init", request.GET["repo"]])
+        cardiff.exec_cmd(["init", os.path.join(".", request.GET["repo"])])
 
 def about(request):
     context = cardiff.settings["information"]
