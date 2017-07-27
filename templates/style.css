@@ -94,6 +94,11 @@ table.c_table tr.normal td{
     font-size: 18px;
 }
 
+#about {
+    width: 980px;
+    margin: 120px auto 0 auto;
+}
+
 #left_panel {
     width: 18%;
     height: 100%;
