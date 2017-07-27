@@ -1,7 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: "Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     margin: auto;
     background-color: #eee;
+    height: 100%;
 }
 
 h1 {
@@ -88,4 +93,19 @@ table.c_table tr.normal td{
     width: 100%;
     height: 48px;
     background-color: #666
+}
+
+#left_panel {
+    width: 18%;
+    height: 100%;
+    background-color: #444;
+    color: #eee;
+    float: left;
+}
+
+#right_panel {
+    width: 82%;
+    height: 100%;
+    background-color: #eee;
+    float: left;
 }

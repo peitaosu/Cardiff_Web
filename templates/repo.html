@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html>
+{% extends "main.html" %}
 
-<head>
+{% block title %}
     <title>Repository - Cardiff Web</title>
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
-    <link rel="shortcut icon" href={% static "cardiff.png" %}/>
-</head>
+{% endblock %}
 
-<body>
-    {% include "header.html" %}
-
-    <h1>Repository</h1>
-
+{% block right_panel %}
     <h2>Current Repository</h2>
     <p>{{ current_repo }}</p>
 
@@ -32,7 +24,4 @@
         </tr>
         {% endfor %}
     </table>
-
-</body>
-
-</html>
+{% endblock %}
