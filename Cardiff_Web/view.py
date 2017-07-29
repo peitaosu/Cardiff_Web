@@ -20,6 +20,7 @@ def is_set(value):
 
 def index(request):
     context = {}
+    context["vcs"] = cardiff.settings["vcs"]
     if not is_set(cardiff.settings["repo"]):
         context["repo_set"] = False
         if not is_set(cardiff.settings["user.name"]):

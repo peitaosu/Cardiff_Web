@@ -12,6 +12,7 @@
     <div id="prepare">
         <h1>Preparation</h1>
         <p>Looks you are using Cardiff first time, please initial your first repository with your name and email.</p>
+        <p>This repository will be used to store all versions of file. Current VCS is: {{ vcs }}.</p>
         <form action="/init" method="get">
             {% if repo_set == False %}
             <input type="text" name="repo" placeholder="Repository"/>
