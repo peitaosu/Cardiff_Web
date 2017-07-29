@@ -26,7 +26,7 @@ def index(request):
             context["name_set"] = False
         if not is_set(cardiff.settings["user.email"]):
             context["email_set"] = False
-        return render(request, "preparation.html", context)
+        return render(request, "prepare.html", context)
     else:
         return repo(request)
 
