@@ -12,6 +12,8 @@ cardiff = Cardiff()
 cardiff_settings_path = os.path.join(cardiff_path, "settings.json")
 cardiff.load_settings(cardiff_settings_path)
 
+repo_path = os.path.join(".", "repositories")
+
 def is_set(value):
     if value.startswith("<") and value.endswith(">"):
         return False
@@ -42,12 +44,14 @@ def response_console_output(func):
 
 @response_console_output
 def init(request):
+    if not os.path.isdir(repo_path):
+        os.mkdir(repo_path)
     if "username" in request.GET:
         cardiff.settings["user.name"] = request.GET["username"]
     if "useremail" in request.GET:
         cardiff.settings["user.email"] = request.GET["useremail"]
     if "repo" in request.GET:
-        cardiff.exec_cmd(["init", os.path.join(".", request.GET["repo"])])
+        cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["repo"])])
 
 def about(request):
     context = cardiff.settings["information"]
