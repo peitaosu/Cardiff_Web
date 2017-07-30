@@ -9,6 +9,25 @@ Cardiff Web is the web-based user interface for [Cardiff](https://github.com/pei
 * python 2.x
 * ```pip install -r requirements.txt```
 
+## Already Supported
+* Cardiff Preparation
+* Repository
+    - Initialization
+    - Display Information
+* About
+    - Introduction
+    - License
+
+## Plan to Support
+* Repository
+    - Branches
+    - Commits
+* Diff
+    - Visualization
+    - Parameterization
+* Merge
+* Rollback
+
 ## Usage
 
 ```
