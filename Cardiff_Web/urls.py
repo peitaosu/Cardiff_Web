@@ -20,7 +20,6 @@ from . import view
 urlpatterns = [
     url(r'^$', view.index),
     url(r'^init', view.init),
-    url(r'^info', view.info),
     url(r'^about', view.about),
     url(r'^repo', view.repo)
 ]

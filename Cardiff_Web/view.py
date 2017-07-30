@@ -41,10 +41,6 @@ def response_console_output(func):
     return new_func
 
 @response_console_output
-def info(request):
-    cardiff.exec_cmd(["info"])
-
-@response_console_output
 def init(request):
     if "username" in request.GET:
         cardiff.settings["user.name"] = request.GET["username"]
