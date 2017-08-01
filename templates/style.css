@@ -167,3 +167,19 @@ table.c_table tr.normal td{
     vertical-align: middle;
     line-height: normal;
 }
+
+#main_info {
+    width: 80%;
+    height: 100%;
+    background-color: #999;
+    color: #eee;
+    float: left;
+}
+
+#repo_panel {
+    width: 20%;
+    height: 100%;
+    background-color: #444;
+    color: #eee;
+    float: left;
+}
