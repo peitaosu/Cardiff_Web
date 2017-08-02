@@ -7,7 +7,11 @@
 {% block right_panel %}
 
     <div id="main_info">
-        <p></p>
+        <form id="upload" enctype="multipart/form-data" method="post" action="/upload">
+            <p>Commit Your File into Repo: </p>
+            <input id="file_upload" name="file" type="file" />
+            <input id="submit" type="submit" value="Commit" />
+        </form>
     </div>
 
     <div id="repo_panel">
