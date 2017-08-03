@@ -1,5 +1,7 @@
 # Cardiff Web
 
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/peitaosu/Cardiff_Web/master/LICENSE)
+
 ## What is Cardiff Web ?
 
 Cardiff Web is the web-based user interface for [Cardiff](https://github.com/peitaosu/Cardiff).
