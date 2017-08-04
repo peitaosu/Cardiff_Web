@@ -8,10 +8,12 @@
 
     <div id="main_info">
         <form id="upload" enctype="multipart/form-data" method="post" action="/upload">
+            {% csrf_token %}
             <p>Commit Your File into Repo: </p>
-            <input id="file_upload" name="file" type="file" />
+            <input id="file_upload" name="commit_file" type="file" />
             <input id="submit" type="submit" value="Commit" />
         </form>
+        <p>{{ rlt }}</p>
     </div>
 
     <div id="repo_panel">

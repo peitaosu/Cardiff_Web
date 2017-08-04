@@ -70,3 +70,14 @@ def repo(request):
     context["current_branch"] = cardiff.vcs_current_branch
     context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
+
+def upload(request):
+    up_file = request.FILES["commit_file"]
+    up_file_name = up_file.name
+    save_location = os.path.join(cardiff.settings["repo"], up_file_name)
+    with open(save_location, 'wb+') as destination:
+        for chunk in up_file.chunks():
+            destination.write(chunk)
+    context = {}
+    context["rlt"] = up_file_name + " saved in: " + save_location
+    return render(request, "repo.html", context)
