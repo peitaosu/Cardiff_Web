@@ -79,5 +79,14 @@ def upload(request):
         for chunk in up_file.chunks():
             destination.write(chunk)
     context = {}
-    context["rlt"] = up_file_name + " saved in: " + save_location
+    context["uploaded"] = up_file_name
+    context["save_loc"] = save_location
+    return render(request, "repo.html", context)
+
+def commit(request):
+    up_file = request.POST["uploaded_file"]
+    commit_msg = request.POST["commit_msg"]
+    cardiff.exec_cmd(["commit", up_file, commit_msg])
+    context = {}
+    context["committed"] = up_file
     return render(request, "repo.html", context)

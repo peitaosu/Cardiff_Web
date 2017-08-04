@@ -13,7 +13,19 @@
             <input id="file_upload" name="commit_file" type="file" />
             <input id="submit" type="submit" value="Commit" />
         </form>
-        <p>{{ rlt }}</p>
+        {% if uploaded %}
+        <p>{{ uploaded }} saved in: {{ save_loc }}</p>
+        <p>Do you want to commit {{ uploaded }} ?</p>
+        <form id="commit" method="post" action="/commit">
+            {% csrf_token %}
+            <input type="hidden" value="{{ uploaded }}" name="uploaded_file">
+            <input type="text" name="commit_msg" placeholder="Commit Message"/>
+            <input type="submit" value="Commit" />
+        </form>
+        {% if committed %}
+        <p>{{ committed }} committed.</p>
+        {% endif %}
+        {% endif %}
     </div>
 
     <div id="repo_panel">
