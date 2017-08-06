@@ -32,6 +32,11 @@
         <h2>Current Repository</h2>
         <p>{{ current_repo }}</p>
 
+        <h2>Other Repositories</h2>
+        {% for o_repo in other_repo %}
+        <p>{{ o_repo }}</p>
+        {% endfor %}
+
         <h2>Current Branch</h2>
         <p>{{ current_branch }}</p>
 

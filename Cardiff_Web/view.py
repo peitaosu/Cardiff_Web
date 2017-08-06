@@ -67,6 +67,7 @@ def repo(request):
     context = {}
     vcs = cardiff.setup_vcs()
     context["current_repo"] = cardiff.settings["repo"]["current"]
+    context["other_repo"] = cardiff.settings["repo"]["others"]
     context["current_branch"] = cardiff.vcs_current_branch
     context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
