@@ -10,7 +10,6 @@ from Cardiff import Cardiff
 
 cardiff = Cardiff()
 cardiff_settings_path = os.path.join(cardiff_path, "settings.json")
-cardiff.load_settings(cardiff_settings_path)
 
 repo_path = os.path.join(".", "repositories")
 
@@ -19,6 +18,14 @@ def is_set(value):
         return False
     else:
         return True
+
+def load():
+    cardiff.load_settings(cardiff_settings_path)
+
+def save():
+    cardiff.save_settings(cardiff_settings_path)
+
+load()
 
 def index(request):
     context = {}
@@ -52,6 +59,7 @@ def init(request):
         cardiff.settings["user.email"] = request.GET["useremail"]
     if "repo" in request.GET:
         cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["repo"])])
+    save()
 
 def about(request):
     context = cardiff.settings["information"]
@@ -64,6 +72,7 @@ def repo(request):
         if "useremail" in request.GET:
             cardiff.settings["user.email"] = request.GET["useremail"]
         cardiff.exec_cmd(["init", request.GET["init"]])
+        save()
     context = {}
     vcs = cardiff.setup_vcs()
     context["current_repo"] = cardiff.settings["repo"]["current"]
