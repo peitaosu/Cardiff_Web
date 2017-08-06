@@ -23,7 +23,7 @@ def is_set(value):
 def index(request):
     context = {}
     context["vcs"] = cardiff.settings["vcs"]
-    if not is_set(cardiff.settings["repo"]):
+    if not is_set(cardiff.settings["repo"]["current"]):
         context["repo_set"] = False
         if not is_set(cardiff.settings["user.name"]):
             context["name_set"] = False
@@ -66,7 +66,7 @@ def repo(request):
         cardiff.exec_cmd(["init", request.GET["init"]])
     context = {}
     vcs = cardiff.setup_vcs()
-    context["current_repo"] = cardiff.settings["repo"]
+    context["current_repo"] = cardiff.settings["repo"]["current"]
     context["current_branch"] = cardiff.vcs_current_branch
     context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
@@ -74,7 +74,7 @@ def repo(request):
 def upload(request):
     up_file = request.FILES["commit_file"]
     up_file_name = up_file.name
-    save_location = os.path.join(cardiff.settings["repo"], up_file_name)
+    save_location = os.path.join(cardiff.settings["repo"]["current"], up_file_name)
     with open(save_location, 'wb+') as destination:
         for chunk in up_file.chunks():
             destination.write(chunk)
