@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.utils.encoding import smart_str
 
 import os, sys, inspect, StringIO
 current_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -100,3 +101,15 @@ def commit(request):
     context = {}
     context["committed"] = up_file
     return render(request, "repo.html", context)
+
+def checkout(request):
+    file_to_checkout = request.GET["file"]
+    file_version = request.GET["version"]
+    cardiff.exec_cmd(["checkout", file_to_checkout, file_version])
+    file_path = os.path.join(cardiff.settings["repo"]["current"], file_to_checkout)
+    response = HttpResponse(file(file_path))
+    response['Content-Type'] = 'application/force-download'
+    response['Content-Length'] = os.path.getsize(file_path)
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_checkout)
+    response['Accept-Ranges'] = 'bytes'
+    return response
