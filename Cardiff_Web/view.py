@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
 
-import os, sys, inspect, StringIO
+import os, sys, inspect, StringIO, shutil, time
 current_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 cardiff_path = os.path.join(os.path.dirname(current_path), "Cardiff")
 sys.path.insert(0, cardiff_path)
@@ -13,6 +13,7 @@ cardiff = Cardiff()
 cardiff_settings_path = os.path.join(cardiff_path, "settings.json")
 
 repo_path = os.path.join(".", "repositories")
+temp_path = os.path.join(".", "temp")
 
 def is_set(value):
     if value.startswith("<") and value.endswith(">"):
@@ -102,14 +103,24 @@ def commit(request):
     context["committed"] = up_file
     return render(request, "repo.html", context)
 
-def checkout(request):
+def version(request):
     file_to_checkout = request.GET["file"]
     file_version = request.GET["version"]
     cardiff.exec_cmd(["checkout", file_to_checkout, file_version])
     file_path = os.path.join(cardiff.settings["repo"]["current"], file_to_checkout)
-    response = HttpResponse(file(file_path))
-    response['Content-Type'] = 'application/force-download'
-    response['Content-Length'] = os.path.getsize(file_path)
-    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_checkout)
-    response['Accept-Ranges'] = 'bytes'
-    return response
+    if "download" in request.GET:
+        response = HttpResponse(file(file_path))
+        response['Content-Type'] = 'application/force-download'
+        response['Content-Length'] = os.path.getsize(file_path)
+        response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_checkout)
+        response['Accept-Ranges'] = 'bytes'
+        return response
+    file_format = os.path.splitext(os.path.basename(file_path))[-1]
+    temp_file_name = os.path.basename(file_path).replace(file_format, "")
+    temp_file = os.path.join(temp_path, temp_file_name + str(time.time()) + file_format)
+    if not os.path.isdir(temp_path):
+        os.mkdir(temp_path)
+    shutil.copyfile(file_path, temp_file)
+    context = {}
+    context["temp_file"] = os.path.basename(temp_file)
+    return render(request, "repo.html", context)

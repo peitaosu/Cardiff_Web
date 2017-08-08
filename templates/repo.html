@@ -26,6 +26,13 @@
         <p>{{ committed }} committed.</p>
         {% endif %}
         {% endif %}
+        {% if temp_file %}
+        {% load static %}
+        {% static "" as temp_url %}
+        <div id="show">
+            <img src={{ temp_url }}{{ temp_file }} />
+        </div>
+        {% endif %}
     </div>
 
     <div id="repo_panel">
