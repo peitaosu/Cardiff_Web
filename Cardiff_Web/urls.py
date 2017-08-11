@@ -24,5 +24,5 @@ urlpatterns = [
     url(r'^repo', view.repo),
     url(r'^upload', view.upload),
     url(r'^commit', view.commit),
-    url(r'version', view.version)
+    url(r'^version', view.version)
 ]
