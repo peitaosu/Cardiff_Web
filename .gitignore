@@ -4,3 +4,9 @@
 # Python
 *.pyc
 
+# Log Files
+*.log
+
+# Temporary Folder
+temp/
+
