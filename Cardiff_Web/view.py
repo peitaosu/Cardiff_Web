@@ -123,4 +123,8 @@ def version(request):
     shutil.copyfile(file_path, temp_file)
     context = {}
     context["temp_file"] = os.path.basename(temp_file)
+    context["current_repo"] = cardiff.settings["repo"]["current"]
+    context["other_repo"] = cardiff.settings["repo"]["others"]
+    context["current_branch"] = cardiff.vcs_current_branch
+    context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
