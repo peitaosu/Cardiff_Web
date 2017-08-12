@@ -15,14 +15,14 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from . import view
+from . import views
 
 urlpatterns = [
-    url(r'^$', view.index),
-    url(r'^init', view.init),
-    url(r'^about', view.about),
-    url(r'^repo', view.repo),
-    url(r'^upload', view.upload),
-    url(r'^commit', view.commit),
-    url(r'^version', view.version)
+    url(r'^$', views.index),
+    url(r'^init', views.init),
+    url(r'^about', views.about),
+    url(r'^repo', views.repo),
+    url(r'^upload', views.upload),
+    url(r'^commit', views.commit),
+    url(r'^version', views.version)
 ]
