@@ -181,4 +181,14 @@ table.c_table tr.normal td{
     background-color: #444;
     color: #eee;
     float: left;
+    text-align: center;
+}
+
+#repo_panel .c_table {
+    color: initial;
+}
+
+#show {
+    width: 90%;
+    padding: 5%;
 }
