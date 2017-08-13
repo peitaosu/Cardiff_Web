@@ -77,6 +77,25 @@ def repo(request):
         save()
     context = {}
     vcs = cardiff.setup_vcs()
+    if "file" in request.GET:
+        file_to_checkout = request.GET["file"]
+        file_version = request.GET["version"]
+        cardiff.exec_cmd(["checkout", file_to_checkout, file_version])
+        file_path = os.path.join(cardiff.settings["repo"]["current"], file_to_checkout)
+        if "download" in request.GET:
+            response = HttpResponse(file(file_path))
+            response['Content-Type'] = 'application/force-download'
+            response['Content-Length'] = os.path.getsize(file_path)
+            response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_checkout)
+            response['Accept-Ranges'] = 'bytes'
+            return response
+        file_format = os.path.splitext(os.path.basename(file_path))[-1]
+        temp_file_name = os.path.basename(file_path).replace(file_format, "")
+        temp_file = os.path.join(temp_path, temp_file_name + str(time.time()) + file_format)
+        if not os.path.isdir(temp_path):
+            os.mkdir(temp_path)
+        shutil.copyfile(file_path, temp_file)
+        context["temp_file"] = os.path.basename(temp_file)
     context["current_repo"] = cardiff.settings["repo"]["current"]
     context["other_repo"] = cardiff.settings["repo"]["others"]
     context["current_branch"] = cardiff.vcs_current_branch
@@ -101,30 +120,4 @@ def commit(request):
     cardiff.exec_cmd(["commit", up_file, commit_msg])
     context = {}
     context["committed"] = up_file
-    return render(request, "repo.html", context)
-
-def version(request):
-    file_to_checkout = request.GET["file"]
-    file_version = request.GET["version"]
-    cardiff.exec_cmd(["checkout", file_to_checkout, file_version])
-    file_path = os.path.join(cardiff.settings["repo"]["current"], file_to_checkout)
-    if "download" in request.GET:
-        response = HttpResponse(file(file_path))
-        response['Content-Type'] = 'application/force-download'
-        response['Content-Length'] = os.path.getsize(file_path)
-        response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(file_to_checkout)
-        response['Accept-Ranges'] = 'bytes'
-        return response
-    file_format = os.path.splitext(os.path.basename(file_path))[-1]
-    temp_file_name = os.path.basename(file_path).replace(file_format, "")
-    temp_file = os.path.join(temp_path, temp_file_name + str(time.time()) + file_format)
-    if not os.path.isdir(temp_path):
-        os.mkdir(temp_path)
-    shutil.copyfile(file_path, temp_file)
-    context = {}
-    context["temp_file"] = os.path.basename(temp_file)
-    context["current_repo"] = cardiff.settings["repo"]["current"]
-    context["other_repo"] = cardiff.settings["repo"]["others"]
-    context["current_branch"] = cardiff.vcs_current_branch
-    context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
