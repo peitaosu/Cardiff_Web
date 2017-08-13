@@ -7,7 +7,7 @@
 {% block right_panel %}
 
     <div id="main_info">
-        <form id="upload" enctype="multipart/form-data" method="post" action="/upload">
+        <form id="upload" enctype="multipart/form-data" method="post" action="/repo">
             {% csrf_token %}
             <p>Commit Your File into Repo: </p>
             <input id="file_upload" name="commit_file" type="file" />
@@ -16,7 +16,7 @@
         {% if uploaded %}
         <p>{{ uploaded }} saved in: {{ save_loc }}</p>
         <p>Do you want to commit {{ uploaded }} ?</p>
-        <form id="commit" method="post" action="/commit">
+        <form id="commit" method="post" action="/repo">
             {% csrf_token %}
             <input type="hidden" value="{{ uploaded }}" name="uploaded_file">
             <input type="text" name="commit_msg" placeholder="Commit Message"/>
