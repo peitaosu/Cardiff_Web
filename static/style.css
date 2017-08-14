@@ -192,3 +192,15 @@ table.c_table tr.normal td{
     width: 90%;
     padding: 5%;
 }
+
+#main_info input {
+    font-size: 14px;
+    padding: 6px;
+}
+
+#main_info input[type=submit] {
+    border: none;
+    height: 33px;
+    width: 120px;
+    font-size: 14px;
+}
