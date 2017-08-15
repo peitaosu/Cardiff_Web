@@ -28,6 +28,7 @@ def save():
     cardiff.save_settings(cardiff_settings_path)
 
 load()
+os.environ["SILENT_MODE"] = "1"
 
 def index(request):
     context = {}
@@ -97,6 +98,21 @@ def repo(request):
                 os.mkdir(temp_path)
             shutil.copyfile(file_path, temp_file)
             context["temp_file"] = os.path.basename(temp_file)
+            if "diff" in request.GET:
+                version_to_diff = request.GET["diff"]
+                cardiff.exec_cmd(["checkout", file_to_checkout, version_to_diff])
+                temp_file = os.path.join(temp_path, temp_file_name + str(time.time()) + file_format)
+                shutil.copyfile(file_path, temp_file)
+                context["temp_file_to_diff"] = os.path.basename(temp_file)
+                file_diffs = cardiff.exec_cmd(["diff", file_to_checkout, file_version, version_to_diff])
+                diff_before_name = os.path.basename(file_diffs[0])
+                diff_before = os.path.join(temp_path, diff_before_name)
+                shutil.copyfile(file_diffs[0], diff_before)
+                context["temp_file_diff_before"] = diff_before_name
+                diff_after_name = os.path.basename(file_diffs[1])
+                diff_after = os.path.join(temp_path, diff_after_name)
+                shutil.copyfile(file_diffs[1], diff_after)
+                context["temp_file_diff_after"] = diff_after_name                
     if request.method == "POST":
         if "commit_file" in request.FILES:
             up_file = request.FILES["commit_file"]

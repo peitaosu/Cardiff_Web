@@ -31,6 +31,11 @@
         {% static "" as temp_url %}
         <div id="show">
             <img src={{ temp_url }}{{ temp_file }} />
+            {% if temp_file_to_diff %}
+            <img src={{ temp_url }}{{ temp_file_to_diff }}/>
+            <img src={{ temp_url }}{{ temp_file_diff_before }}/>
+            <img src={{ temp_url }}{{ temp_file_diff_after }}/>
+            {% endif %}
         </div>
         {% endif %}
     </div>
