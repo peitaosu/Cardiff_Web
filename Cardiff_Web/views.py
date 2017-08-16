@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils.encoding import smart_str
 
-import os, sys, inspect, StringIO, shutil, time
+import os, sys, inspect, StringIO, shutil, time, json
 current_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 cardiff_path = os.path.join(os.path.dirname(current_path), "Cardiff")
 sys.path.insert(0, cardiff_path)
@@ -112,7 +112,9 @@ def repo(request):
                 diff_after_name = os.path.basename(file_diffs[1])
                 diff_after = os.path.join(temp_path, diff_after_name)
                 shutil.copyfile(file_diffs[1], diff_after)
-                context["temp_file_diff_after"] = diff_after_name                
+                context["temp_file_diff_after"] = diff_after_name
+                with open(file_diffs[2], "r") as file_diff_parameters:
+                    context["temp_file_diff_parameters"] = json.load(file_diff_parameters)
     if request.method == "POST":
         if "commit_file" in request.FILES:
             up_file = request.FILES["commit_file"]
