@@ -78,6 +78,9 @@ def repo(request):
                 cardiff.settings["user.email"] = request.GET["useremail"]
             cardiff.exec_cmd(["init", request.GET["init"]])
             save()
+        if "branch" in request.GET:
+            branch_to_switch = request.GET["branch"]
+            context["branch_ret_str"] = cardiff.exec_cmd(["branch", branch_to_switch])
         vcs = cardiff.setup_vcs()
         if "version" in request.GET:
             file_to_checkout = request.GET["file"]
