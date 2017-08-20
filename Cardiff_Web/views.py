@@ -78,6 +78,10 @@ def repo(request):
                 cardiff.settings["user.email"] = request.GET["useremail"]
             cardiff.exec_cmd(["init", request.GET["init"]])
             save()
+        if "repo" in request.GET:
+            repo_to_switch = os.path.join(repo_path, request.GET["repo"])
+            cardiff.exec_cmd(["repo", repo_to_switch])
+            save()
         if "branch" in request.GET:
             branch_to_switch = request.GET["branch"]
             context["branch_ret_str"] = cardiff.exec_cmd(["branch", branch_to_switch])
