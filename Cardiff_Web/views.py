@@ -69,6 +69,7 @@ def init(request):
     context["initial_result"] = init_result
     if init_result:
         save()
+        return repo(request)
     else:
         context["initial_info"] = {
             "repo": request.GET["repo"],
