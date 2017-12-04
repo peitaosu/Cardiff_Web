@@ -1,25 +1,9 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    {% block title %}
-    <title>Cardiff Web</title>
-    {% endblock %}
-    {% load static %}
-    <link rel="stylesheet" type="text/css" href={% static "style.css" %}/>
-    <link rel="shortcut icon" href={% static "cardiff.png" %}/>
-    {% block spec_style %}
-    {% endblock %}
-</head>
-
+{% include "head.html" %}
 <body>
-    <div id="left_panel">
-    {% include "left_panel.html" %}
-    </div>
-    <div id="right_panel">
-    {% block right_panel %}
-    {% endblock %}
+    <div class="container">
+        {%include "navbar.html" %}
     </div>
 </body>
-
 </html>
