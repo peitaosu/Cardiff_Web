@@ -37,8 +37,12 @@ def index(request):
         context["repo_set"] = False
         if not is_set(cardiff.settings["user.name"]):
             context["name_set"] = False
+        else:
+            context["name_set"] = cardiff.settings["user.name"]
         if not is_set(cardiff.settings["user.email"]):
             context["email_set"] = False
+        else:
+            context["email_set"] = cardiff.settings["user.email"]
         return render(request, "prepare.html", context)
     else:
         return repo(request)
@@ -52,7 +56,6 @@ def response_console_output(func):
         return HttpResponse(["<BR>" if char == "\n" else char for char in console_output.getvalue()])
     return new_func
 
-@response_console_output
 def init(request):
     if not os.path.isdir(repo_path):
         os.mkdir(repo_path)
@@ -61,8 +64,18 @@ def init(request):
     if "useremail" in request.GET:
         cardiff.settings["user.email"] = request.GET["useremail"]
     if "repo" in request.GET:
-        cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["repo"])])
-    save()
+        init_result = cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["repo"])])
+    context = {}
+    context["initial_result"] = init_result
+    if init_result:
+        save()
+    else:
+        context["initial_info"] = {
+            "repo": request.GET["repo"],
+            "username": cardiff.settings["user.name"],
+            "useremail": cardiff.settings["user.email"]
+        }
+        return render(request, "error.html", context)
 
 def about(request):
     context = cardiff.settings["information"]
