@@ -1,70 +1,150 @@
-{% extends "main.html" %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}
-    <title>Repository - Cardiff Web</title>
-{% endblock %}
+<head>
+    {% include "head.html" %}
+    <title>Repositories - Cardiff Web</title>
+</head>
 
-{% block right_panel %}
+<body>
+    <div class="container">
+        {% include "navbar.html" %}
 
-    <div id="main_info">
-        <form id="upload" enctype="multipart/form-data" method="post" action="/repo">
-            {% csrf_token %}
-            <p>Commit Your File into Repo: </p>
-            <input id="file_upload" name="commit_file" type="file" />
-            <input id="submit" type="submit" value="Commit" />
-        </form>
-        {% if uploaded %}
-        <p>{{ uploaded }} saved in: {{ save_loc }}</p>
-        <p>Do you want to commit {{ uploaded }} ?</p>
-        <form id="commit" method="post" action="/repo">
-            {% csrf_token %}
-            <input type="hidden" value="{{ uploaded }}" name="uploaded_file">
-            <input type="text" name="commit_msg" placeholder="Commit Message"/>
-            <input type="submit" value="Commit" />
-        </form>
-        {% if committed %}
-        <p>{{ committed }} committed.</p>
-        {% endif %}
-        {% endif %}
-        {% if temp_file %}
-        {% load static %}
-        {% static "" as temp_url %}
-        <div id="show">
-            <img src={{ temp_url }}{{ temp_file }} />
-            {% if temp_file_to_diff %}
-            <img src={{ temp_url }}{{ temp_file_to_diff }}/>
-            <img src={{ temp_url }}{{ temp_file_diff_before }}/>
-            <img src={{ temp_url }}{{ temp_file_diff_after }}/>
-            <p>{{ temp_file_diff_parameters }}</p>
-            {% endif %}
+        <div class="row">
+            <div class="col-md-9">
+                <div class="alert alert-warning alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <h4>Upload Your File into Current Repository.</h4>
+                    <button class="btn btn-warning" data-toggle="modal" data-target="#upload-modal">Upload File</button>
+                </div>
+                <div class="modal fade" id="upload-modal" tabindex="-1" role="dialog" aria-labelledby="upload-modal-label" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <form action="/repo" id="upload" enctype="multipart/form-data" method="post" class="modal-content">
+                            {% csrf_token %}
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="upload-modal-label">Upload Your File into Repository</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <label>File</label>
+                                        <input class="form-control" id="file_upload" name="commit_file" type="file" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="submit">Commit</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                {% if uploaded %}
+                <div class="alert alert-success alert-dismissable">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                    <strong>Uploaded!</strong> {{ uploaded }} saved in: {{ save_loc }}
+                </div>
+
+                <div class="alert alert-success alert-dismissable">
+                    <p>Do you want to commit {{ uploaded }} ?</p>
+                    <form class="" id="commit" method="post" action="/repo">
+                        {% csrf_token %}
+                        <input type="hidden" value="{{ uploaded }}" name="uploaded_file">
+                        <input type="text" class="form-control" name="commit_msg" placeholder="Commit Message" />
+                        <input type="submit" class="btn btn-primary" value="Commit" />
+                    </form>
+                    {% if committed %}
+                    <p>{{ committed }} committed.</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+                
+                {% if committed %}
+                <p>{{ committed }} committed.</p>
+                {% endif %}
+
+                {% if temp_file %}
+                {% load static %}
+                {% static "" as temp_url %}             
+                <div class="jumbotron">
+                    <div id="carousel-show-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-show-generic" data-slide-to="0" class="active"></li>
+                            <li data-target="#carousel-show-generic" data-slide-to="1" class=""></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img src={{ temp_url }}{{ temp_file }}/>
+                            </div>
+                            {% if temp_file_to_diff %}                            
+                            <div class="item">
+                                <img src={{ temp_url }}{{ temp_file_to_diff }}/>
+                            </div>
+                            <!--{{ temp_url }}{{ temp_file_diff_before }}-->
+                            <!--{{ temp_url }}{{ temp_file_diff_after }}-->
+                            {% endif %}
+                        </div>
+                        <a class="left carousel-control" href="#carousel-show-generic" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-show-generic" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+                    {% if temp_file_to_diff %}
+                    <div class="jumbotron-contents">
+                        <p>{{ temp_file_diff_parameters }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+            
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Repositories</div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">
+                            <span class="badge badge-primary">38</span>{{ current_repo }}</a>
+                        {% for o_repo in other_repo %}
+                        <a href="#" class="list-group-item">{{ o_repo }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading">Branches</div>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">
+                            <span class="badge badge-primary">38</span>{{ current_branch }}</a>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">Commit Logs</div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>#Hash</th>
+                                <th>Message</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for log_item in commit_logs %}
+                            <tr>
+                                <td>{{ log_item.1|slice:":8" }}</td>
+                                <td>{{ log_item.4 }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-        {% endif %}
+
+        {% include "footer.html" %}
     </div>
-
-    <div id="repo_panel">
-        <h2>Current Repository</h2>
-        <p>{{ current_repo }}</p>
-
-        <h2>Other Repositories</h2>
-        {% for o_repo in other_repo %}
-        <p>{{ o_repo }}</p>
-        {% endfor %}
-
-        <h2>Current Branch</h2>
-        <p>{{ current_branch }}</p>
-
-        <h2>Commit Logs</h2>
-        <table class="c_table" border="1">
-            <tr>
-                <td>Hash</td>
-                <td>Message</td>
-            </tr>
-            {% for log_item in commit_logs %}
-            <tr>
-                <td>{{ log_item.1|slice:":8" }}</td>
-                <td>{{ log_item.4 }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
-{% endblock %}
+</body>
