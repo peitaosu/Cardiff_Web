@@ -82,6 +82,10 @@ def about(request):
     context = cardiff.settings["information"]
     return render(request, "about.html", context)
 
+def explore(request):
+    context = {}
+    return render(request, "explore.html", context)
+
 def repo(request):
     context = {}
     if request.method == "GET":
