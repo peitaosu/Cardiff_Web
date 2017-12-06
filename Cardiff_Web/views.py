@@ -86,6 +86,12 @@ def explore(request):
     context = {}
     return render(request, "explore.html", context)
 
+def settings(request):
+    context = {
+        "cardiff": cardiff.settings
+        }
+    return render(request, "settings.html", context)
+
 def repo(request):
     context = {}
     if request.method == "GET":
