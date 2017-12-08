@@ -105,6 +105,12 @@
                             {% endif %}
                         </div>
                         {% endif %}
+
+                        {% if image_diff_view %}
+                        <div class="embed-responsive" style="padding-bottom: {{ view_percent }}">
+                            <iframe class="embed-responsive-item" src="/imagediffview"></iframe>
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
