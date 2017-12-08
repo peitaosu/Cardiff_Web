@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Diffview</title>
+    <meta name="referrer" content="never">
+    {% load static %}
+    <link href={% static "image_diff_view.css" %} rel="stylesheet">
+    <script src={% static "image_diff_view.js" %} type="text/javascript"></script>
+</head>
+
+<body class="is-embedded ">
+    <div class="render-shell js-render-shell">
+        <div data-type="diff" 
+             data-cached="true"
+             data-encode="false"
+             data-file1="{{ file1 }}"
+             data-file2="{{ file2 }}"
+             >
+            <div class="two-up view">
+                <span class="shell">
+                    <span class="deleted-frame">
+                        <img class='deleted asset' />
+                        </a>
+                    </span>
+                    <p class="deleted-meta">
+                        <strong>W: </strong>
+                        <span class="width"></span> |
+                        <strong>H: </strong>
+                        <span class="height"></span>
+                    </p>
+                </span>
+                <span class="shell">
+                    <span class="added-frame">
+                        <img class='added asset' />
+                        </a>
+                    </span>
+                    <p class="added-meta">
+                        <strong>W: </strong>
+                        <span class="width"></span> |
+                        <strong>H: </strong>
+                        <span class="height"></span>
+                    </p>
+                </span>
+            </div>
+            <div class="swipe view">
+                <div class="swipe-frame">
+                    <span class="deleted-frame">
+                        <img class='deleted asset' />
+                    </span>
+                    <span class="swipe-shell">
+                        <span class="added-frame">
+                            <img class='added asset' />
+                        </span>
+                    </span>
+                    <span class="swipe-bar">
+                        <span class="top-handle"></span>
+                        <span class="bottom-handle"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="onion-skin view">
+                <div class="onion-skin-frame">
+                    <span class="deleted-frame">
+                        <img class='deleted asset' />
+                    </span>
+                    <span class="added-frame">
+                        <img class='added asset' />
+                    </span>
+                    <div class="controls">
+                        <span class="transparent"></span>
+                        <div class="slider js-slider">
+                            <span class="js-slider-track slider-track">
+                                <span class="js-dragger dragger"></span>
+                            </span>
+                        </div>
+                        <span class="opaque"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="js-render-bar render-bar render-bar-with-modes">
+                <ul class="js-view-modes render-view-modes">
+                    <li data-mode="two-up" class="js-view-mode-item active">2-up</li>
+                    <li data-mode="swipe" class="js-view-mode-item">Swipe</li>
+                    <li data-mode="onion-skin" class="js-view-mode-item">Onion Skin</li>
+                </ul>
+                <span class="render-message">Cardiff Web Image Diff View, Powered by GitHub.</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

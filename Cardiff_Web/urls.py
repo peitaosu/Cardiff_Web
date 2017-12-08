@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^about', views.about),
     url(r'^repo', views.repo),
     url(r'^explore', views.explore),
-    url(r'^settings', views.settings)
+    url(r'^settings', views.settings),
+    url(r'^imagediffview', views.imagediffview)
 ]
