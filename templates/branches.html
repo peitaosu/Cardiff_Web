@@ -1,0 +1,9 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Branches</div>
+    <div class="list-group">
+        <a href="#" class="list-group-item active">{{ current_branch }}</a>
+        {% for branch_item in other_branches %}
+        <a href="#" class="list-group-item">{{ branch_item }}</a>
+        {% endfor %}
+    </div>
+</div>

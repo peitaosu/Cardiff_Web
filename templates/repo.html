@@ -144,13 +144,8 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="panel panel-default">
-                    <div class="panel-heading">Branches</div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">
-                            <span class="badge badge-primary">38</span>{{ current_branch }}</a>
-                    </div>
-                </div>
+
+                {% include "branches.html" %}
 
                 <div class="panel panel-default">
                     <div class="panel-heading">Commit Logs</div>
