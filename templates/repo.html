@@ -134,16 +134,8 @@
             </div>
             
             <div class="col-md-3">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Repositories</div>
-                    <div class="list-group">
-                        <a href="#" class="list-group-item active">
-                            <span class="badge badge-primary">38</span>{{ current_repo }}</a>
-                        {% for o_repo in other_repo %}
-                        <a href="#" class="list-group-item">{{ o_repo }}</a>
-                        {% endfor %}
-                    </div>
-                </div>
+
+                {% include "repolist.html" %}
 
                 {% include "branches.html" %}
 
