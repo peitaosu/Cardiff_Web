@@ -171,8 +171,8 @@ def repo(request):
             commit_msg = request.POST["commit_msg"]
             cardiff.exec_cmd(["commit", up_file, commit_msg])
             context["committed"] = up_file
-    context["current_repo"] = cardiff.settings["repo"]["current"]
-    context["other_repo"] = cardiff.settings["repo"]["others"]
+    context["current_repo"] = cardiff.settings["repo"]["current"].split("/")[-1]
+    context["other_repo"] = list( o_repo.split("/")[-1] for o_repo in cardiff.settings["repo"]["others"])
     context["current_branch"] = cardiff.vcs_current_branch
     context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
