@@ -16,51 +16,8 @@
                 <p>This repository will be used to store all versions of file. Current VCS is: <b>{{ vcs }}</b>.</p>
                 <p><button class="btn btn-warning" data-toggle="modal" data-target="#prepare-modal">Go to Setup</button></p>
         </div>
-        <div class="modal fade" id="prepare-modal" tabindex="-1" role="dialog" aria-labelledby="prepare-modal-label" aria-hidden="true">
-            <div class="modal-dialog">
-                <form action="/init" method="get" class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                            &times;
-                        </button>
-                        <h4 class="modal-title" id="prepare-modal-label">Prepare</h4>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label>User Name</label>
-                                {% if name_set == False %}
-                                <input type="text" class="form-control" name="username" placeholder="User Name" />
-                                {% else %}
-                                <input type="text" class="form-control" name="username" disabled placeholder="{{ name_set }}" />
-                                {% endif %}
-                            </div>
-                            <div class="col-xs-6">
-                                <label>User Email</label>
-                                {% if email_set == False %}
-                                <input type="text" class="form-control" name="useremail" placeholder="User Email" />
-                                {% else %}
-                                <input type="text" class="form-control" name="useremail" disabled placeholder="{{ email_set }}" />
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <label>Repository</label>
-                                {% if repo_set == False %}
-                                <input type="text" class="form-control" name="repo" placeholder="Repository" />
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Setup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
 
+        {% include "modal/repoinit.html" %}
         {% include "footer.html" %}
     </div>
 </body>
