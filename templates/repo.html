@@ -23,30 +23,6 @@
                     </div>
 
                     <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="btn-group" style="margin-bottom: 20px;">
-                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-modal">Upload</button>
-                                    <button {% if not uploaded %} disabled {% endif %} type="button" class="btn btn-primary" data-toggle="modal" data-target="#commit-modal">Commit</button>
-                                    <button {% if not committed %} disabled {% endif %} type="button" class="btn btn-primary" data-toggle="modal" data-target="#revert-modal">Revert</button>
-                                </div>        
-                            </div>
-                            <div class="col-md-8">
-                                {% if uploaded %}
-                                <div class="alert alert-success alert-dismissable" style="padding: 6px 12px 6px 12px; border: 1px solid transparent;">
-                                    <strong>Uploaded!</strong> {{ uploaded }} Uploaded!
-                                </div>
-                                {% endif %}    
-                                {% if committed %}
-                                <div class="alert alert-success alert-dismissable" style="padding: 6px 12px 6px 12px; border: 1px solid transparent;">
-                                    <strong>Committed!</strong> {{ committed }} Committed.
-                                </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
                         <div class="panel">
                             <ul id="repo-tab" class="nav nav-tabs nav-justified">
                                 <li class="active">
@@ -61,7 +37,43 @@
                             </ul>
                             <div id="repo-tab-content" class="tab-content">
                                 <div class="tab-pane fade active in" id="file-tab">
-
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="btn-group" style="margin-bottom: 20px;">
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#upload-modal">Upload</button>
+                                                <button {% if not uploaded %} disabled {% endif %} type="button" class="btn btn-primary" data-toggle="modal" data-target="#commit-modal">Commit</button>
+                                                <button {% if not committed %} disabled {% endif %} type="button" class="btn btn-primary" data-toggle="modal" data-target="#revert-modal">Revert</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            {% if uploaded %}
+                                            <div class="alert alert-success alert-dismissable" style="padding: 6px 12px 6px 12px; border: 1px solid transparent;">
+                                                <strong>Uploaded!</strong> {{ uploaded }} Uploaded!
+                                            </div>
+                                            {% endif %}
+                                            {% if committed %}
+                                            <div class="alert alert-success alert-dismissable" style="padding: 6px 12px 6px 12px; border: 1px solid transparent;">
+                                                <strong>Committed!</strong> {{ committed }} Committed.
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="panel-default">                                                        
+                                                <div class="panel-heading">Latest commit 12345678 xxx ago</div>
+                                                <table class="table table-hover">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-left">file</td>
+                                                            <td class="text-center">commit message</td>
+                                                            <td class="text-right"><code class="text-primary">12345678</code></td>                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>                                                
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="review-tab">
 
