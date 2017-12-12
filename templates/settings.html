@@ -9,6 +9,44 @@
 <body>
     <div class="container">
         {% include "navbar.html" %}
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="tabbable tabs-left clearfix">
+                        <ul id="setting-tab" class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#cardiff" data-toggle="tab">Cardiff</a>
+                            </li>
+                            <li>
+                                <a href="#cardiff-web" data-toggle="tab">Cardiff Web</a>
+                            </li>
+                            <li>
+                                <a href="#personal" data-toggle="tab">Personal</a>
+                            </li>
+                            <li>
+                                <a href="#developer" data-toggle="tab">Developer</a>
+                            </li>
+                        </ul>
+                        <div id="setting-tab-content" class="tab-content">
+                            <div class="tab-pane fade active in" id="cardiff">
+                                <p>This is a setting tab for Cardiff settings.</p>
+                            </div>
+                            <div class="tab-pane fade" id="cardiff-web">
+                                <p>This is a setting tab for Cardiff Web settings.</p>
+                            </div>
+                            <div class="tab-pane fade" id="personal">
+                                <p>This is a setting tab for personal settings.</p>
+                            </div>
+                            <div class="tab-pane fade" id="developer">
+                                <p>This is a setting tab for developer settings.</p>
+                            </div>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         {% include "footer.html" %}
     </div>
 </body>
