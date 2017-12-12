@@ -1,0 +1,26 @@
+<div class="modal fade" id="commit-modal" tabindex="-1" role="dialog" aria-labelledby="commit-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/repo" id="commit" enctype="multipart/form-data" method="post" class="modal-content">
+            {% csrf_token %}
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="commit-modal-label">Commit Your File into Repository</h4>
+            </div>
+            <input type="hidden" value="{{ uploaded }}" name="uploaded_file">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-6">
+                        <label>Message</label>
+                        <input class="form-control" id="commit_msg" name="commit_msg" type="text" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" id="submit">Commit</button>
+            </div>
+        </form>
+    </div>
+</div>
