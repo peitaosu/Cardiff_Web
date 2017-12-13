@@ -54,7 +54,7 @@ ROOT_URLCONF = 'Cardiff_Web.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+"/templates",],
+        'DIRS': [BASE_DIR+"/Cardiff_Web/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,4 +119,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates"), os.path.join(BASE_DIR, "static"), os.path.join(BASE_DIR, "temp")]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "Cardiff_Web/templates"), os.path.join(BASE_DIR, "Cardiff_Web/static"), os.path.join(BASE_DIR, "temp")]
