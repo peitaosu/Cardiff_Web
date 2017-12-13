@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    {% include "head.html" %}
+    {% include "component/head.html" %}
     <title>Error - Cardiff Web</title>    
 </head>
 
 <body>
     <div class="container">
-        {% include "navbar.html" %}
+        {% include "component/navbar.html" %}
 
         {% if initial_result == False %}
         <div class="alert alert-danger alert-dismissable">
@@ -22,7 +22,7 @@
         </div>
         {% endif %}
 
-        {% include "footer.html" %}
+        {% include "component/footer.html" %}
     </div>
 </body>
 
