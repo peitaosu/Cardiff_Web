@@ -18,11 +18,12 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.index),
-    url(r'^init', views.init),
-    url(r'^about', views.about),
+    url(r'^$', views.default),
     url(r'^repo', views.repo),
+    url(r'^branch', views.branch),
+    url(r'^file', views.files),
     url(r'^explore', views.explore),
     url(r'^settings', views.settings),
-    url(r'^imagediffview', views.imagediffview)
+    url(r'^about', views.about),
+    url(r'^login', views.login)
 ]
