@@ -60,7 +60,13 @@ def login(request):
     if "useremail" in request.GET:
         cardiff.settings["user.email"] = request.GET["useremail"]
     save()
-    return repo(request)
+    return default(request)
+
+def logout(request):
+    cardiff.settings["user.name"] = "<username>"
+    cardiff.settings["user.email"] = "<useremail>"
+    save()
+    return default(request)
 
 def about(request):
     context = cardiff.settings["information"]
@@ -138,13 +144,14 @@ def branch(request):
     return
 
 def repo(request):
+    context = {}
     if not os.path.isdir(repo_path):
         os.mkdir(repo_path)
-    context = {}
     context["vcs"] = cardiff.settings["vcs"]
     if not is_set(cardiff.settings["user.name"]):
         context["name_set"] = False
     else:
+        context["signed"] = cardiff.settings["user.name"]
         context["name_set"] = cardiff.settings["user.name"]
     if not is_set(cardiff.settings["user.email"]):
         context["email_set"] = False
