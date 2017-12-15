@@ -45,6 +45,7 @@ def default(request):
         if not is_set(cardiff.settings["user.name"]):
             context["name_set"] = False
         else:
+            context["signed"] = cardiff.settings["user.name"]
             context["name_set"] = cardiff.settings["user.name"]
         if not is_set(cardiff.settings["user.email"]):
             context["email_set"] = False
@@ -70,16 +71,22 @@ def logout(request):
 
 def about(request):
     context = cardiff.settings["information"]
+    if is_set(cardiff.settings["user.name"]):
+        context["signed"] = cardiff.settings["user.name"]
     return render(request, "about.html", context)
 
 def explore(request):
     context = {}
+    if is_set(cardiff.settings["user.name"]):
+        context["signed"] = cardiff.settings["user.name"]
     return render(request, "explore.html", context)
 
 def settings(request):
     context = {
         "cardiff": cardiff.settings
         }
+    if is_set(cardiff.settings["user.name"]):
+        context["signed"] = cardiff.settings["user.name"]
     return render(request, "settings.html", context)
 
 def files(request):
