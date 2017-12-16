@@ -42,10 +42,10 @@
             {% else %}
             <button type="button" class="navbar-right btn btn-danger navbar-btn" data-toggle="modal" data-target="#login-modal"><i class="glyphicon glyphicon-log-in"></i>&nbsp;&nbsp;Login</button>
             {% endif %}
-            <form class="navbar-form navbar-left" role="search">
+            <form class="navbar-form navbar-left" role="search" id="search" action="/search" method="get">
                 <div class="form-search search-only">
                     <i class="search-icon glyphicon glyphicon-search"></i>
-                    <input type="text" class="form-control search-query" placeholder="Search">
+                    <input type="text" class="form-control search-query" name="keyword" placeholder="Search">
                 </div>
             </form>
         </div>

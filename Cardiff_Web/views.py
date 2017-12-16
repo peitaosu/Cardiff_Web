@@ -81,6 +81,16 @@ def explore(request):
         context["signed"] = cardiff.settings["user.name"]
     return render(request, "explore.html", context)
 
+def search(request):
+    context = {}
+    if is_set(cardiff.settings["user.name"]):
+        context["signed"] = cardiff.settings["user.name"]
+    if "keyword" not in request.GET or request.GET["keyword"] == "":
+        return default(request)
+    keywords = request.GET["keyword"].split()
+    context["keywords"] = keywords
+    return render(request, "search.html", context)
+
 def settings(request):
     context = {
         "cardiff": cardiff.settings
