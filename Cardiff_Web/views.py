@@ -154,6 +154,11 @@ def files(request):
                 "file1": image_to_base64(temp_file_before),
                 "file2": image_to_base64(temp_file_after)
             }
+            if "changes" in request.GET:
+                context = {
+                    "file1": image_to_base64(diff_before),
+                    "file2": image_to_base64(diff_after)                    
+                }
             return render(request, diff_type["image"], context)
     return default(request)
 
