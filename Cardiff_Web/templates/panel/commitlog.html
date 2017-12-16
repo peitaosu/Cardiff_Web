@@ -3,13 +3,15 @@
     <table class="table">
         <thead>
             <tr>
-                <th># Hash</th>
+                <th>Version</th>
+                <th>Hash</th>
                 <th>Message</th>
             </tr>
         </thead>
         <tbody>
             {% for log_item in commit_logs %}
             <tr>
+                <td class="text-center"># {{ forloop.counter }}</td>
                 <td><code class="text-primary">{{ log_item.1|slice:":8" }}</code></td>
                 <td>{{ log_item.4 }}</td>
             </tr>
