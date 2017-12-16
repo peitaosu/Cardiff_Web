@@ -31,7 +31,6 @@ def image_to_base64(image):
     with open(image, "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         image_ext = image.split(".")[-1]
-        print image_ext
         return "data:image/{0};base64,{1}".format(image_ext, encoded_string)
 
 load()
@@ -147,14 +146,15 @@ def files(request):
         context["temp_file_diff_after"] = diff_after_name
         with open(file_diffs[2], "r") as file_diff_parameters:
             context["temp_file_diff_parameters"] = json.load(file_diff_parameters)
-        context = {
-            "file1": image_to_base64(temp_file_before),
-            "file2": image_to_base64(temp_file_after)
-        }
         diff_type = {
-            "image": "imagediffview.html"
+            "image": "diffview/image.html"
         }
-        return render(request, diff_type["image"], context)
+        if file_format in [".jpg", ".png", ".bmp", ".gif"]:
+            context = {
+                "file1": image_to_base64(temp_file_before),
+                "file2": image_to_base64(temp_file_after)
+            }
+            return render(request, diff_type["image"], context)
     return default(request)
 
 def branch(request):
