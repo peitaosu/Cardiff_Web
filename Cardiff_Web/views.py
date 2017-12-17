@@ -189,7 +189,15 @@ def repo(request):
                 cardiff.settings["user.name"] = request.GET["username"]
             if "useremail" in request.GET:
                 cardiff.settings["user.email"] = request.GET["useremail"]
-            cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["init"])])
+            initial_succeed = cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["init"])])
+            if not initial_succeed:
+                context["initial_failed"] = True
+                context["initial_info"] = {
+                    "repo": request.GET["init"],
+                    "username": cardiff.settings["user.name"],
+                    "useremail": cardiff.settings["user.email"]
+                }
+                return render(request, "alert.html", context)
             save()
         if "repo" in request.GET:
             repo_to_switch = os.path.join(repo_path, request.GET["repo"])

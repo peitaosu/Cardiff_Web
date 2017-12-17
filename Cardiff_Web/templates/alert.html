@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {% include "component/head.html" %}
+    <title>Alert - Cardiff Web</title>    
+</head>
+
+<body>
+    <div class="container">
+        {% include "component/navbar.html" %}
+
+        {% if initial_failed %}
+        {% include "alert/initfailed.html" %}
+        {% endif %}
+
+        {% include "component/footer.html" %}
+    </div>
+</body>
+
+</html>
