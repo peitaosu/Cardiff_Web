@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include "component/head.html" %}
+    <title>Diff View - Cardiff Web</title>    
+</head>
+<body>
+    <div class="container">
+        {% include "component/navbar.html" %}
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if diff_view %}
+                <div class="embed-responsive" style="padding-bottom: {{ aspect_ratio }}">
+                    <iframe class="embed-responsive-item" src="/files?diff={{ diff }}&before={{ before }}&after={{ after }}"></iframe>
+                </div>
+                {% endif %}
+            </div>
+        </div>        
+            
+        {% include "component/footer.html" %}
+    </div>
+</body>
+</html>

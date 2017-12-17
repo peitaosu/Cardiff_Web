@@ -22,6 +22,7 @@ urlpatterns = [
     url(r'^repo', views.repo),
     url(r'^branch', views.branch),
     url(r'^file', views.files),
+    url(r'^view', views.view),
     url(r'^explore', views.explore),
     url(r'^search', views.search),
     url(r'^settings', views.settings),

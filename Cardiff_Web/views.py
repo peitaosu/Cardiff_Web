@@ -162,6 +162,16 @@ def files(request):
             return render(request, diff_type["image"], context)
     return default(request)
 
+def view(request):
+    context = {
+        "diff": request.GET["diff"],
+        "before": request.GET["before"],
+        "after": request.GET["after"],
+        "aspect_ratio": "80%",
+        "diff_view": True
+    }
+    return render(request, "view.html", context)
+
 def branch(request):
     return
 
