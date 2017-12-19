@@ -173,7 +173,9 @@ def view(request):
     return render(request, "view.html", context)
 
 def branch(request):
-    return
+    if "name" in request.GET:
+        cardiff.exec_cmd(["branch", request.GET["name"]])
+    return repo(request)
 
 def repo(request):
     context = {}
@@ -209,13 +211,10 @@ def repo(request):
                 }
                 return render(request, "alert.html", context)
             save()
-        if "repo" in request.GET:
-            repo_to_switch = os.path.join(repo_path, request.GET["repo"])
+        if "switch" in request.GET:
+            repo_to_switch = os.path.join(repo_path, request.GET["switch"])
             cardiff.exec_cmd(["repo", repo_to_switch])
             save()
-        if "branch" in request.GET:
-            branch_to_switch = request.GET["branch"]
-            context["branch_ret_str"] = cardiff.exec_cmd(["branch", branch_to_switch])
         vcs = cardiff.setup_vcs()
     if request.method == "POST":
         if "commit_file" in request.FILES:
@@ -235,5 +234,6 @@ def repo(request):
     context["current_repo"] = cardiff.settings["repo"]["current"].split("/")[-1]
     context["other_repo"] = list( o_repo.split("/")[-1] for o_repo in cardiff.settings["repo"]["others"])
     context["current_branch"] = cardiff.vcs_current_branch
+    context["other_branches"] = cardiff.vcs_branches["other"]
     context["commit_logs"] = cardiff.vcs.log()
     return render(request, "repo.html", context)
