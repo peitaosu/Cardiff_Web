@@ -28,20 +28,21 @@
                                 <a href="#developer" data-toggle="tab">Developer</a>
                             </li>
                         </ul>
-                        <div id="setting-tab-content" class="tab-content">
-                            <div class="tab-pane fade active in" id="cardiff">
-                                <p>This is a setting tab for Cardiff settings.</p>
-                            </div>
-                            <div class="tab-pane fade" id="cardiff-web">
-                                <p>This is a setting tab for Cardiff Web settings.</p>
-                            </div>
-                            <div class="tab-pane fade" id="personal">
-                                <p>This is a setting tab for personal settings.</p>
-                            </div>
-                            <div class="tab-pane fade" id="developer">
-                                <p>This is a setting tab for developer settings.</p>
-                            </div>
-    
+                        <div class="col-md-10">
+                            <form method="post" action="/settings" id="setting-tab-content" class="tab-content">
+                                <div class="tab-pane fade active in" id="cardiff">
+                                    {% include "setting/cardiff.html" %}
+                                </div>
+                                <div class="tab-pane fade" id="cardiff-web">
+                                    {% include "setting/cardiffweb.html" %}
+                                </div>
+                                <div class="tab-pane fade" id="personal">
+                                    {% include "setting/personal.html" %}
+                                </div>
+                                <div class="tab-pane fade" id="developer">
+                                    {% include "setting/developer.html" %}
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
