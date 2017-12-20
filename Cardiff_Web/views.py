@@ -96,6 +96,11 @@ def settings(request):
         }
     if is_set(cardiff.settings["user.name"]):
         context["signed"] = cardiff.settings["user.name"]
+    if request.method == "POST":
+        for key in request.POST:
+            cardiff.settings[key] = request.POST[key]
+        save()
+        context["saved"] = True
     return render(request, "settings.html", context)
 
 def files(request):
