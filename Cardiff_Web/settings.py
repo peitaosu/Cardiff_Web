@@ -63,6 +63,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'libraries':{
+                'get_d_value': 'Cardiff_Web.templatetags.get_d_value'
+            },
         },
     },
 ]

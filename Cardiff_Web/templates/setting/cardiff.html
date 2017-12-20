@@ -1,9 +1,10 @@
+{% load get_d_value %}
 <div class="col-xs-6">
     <label>User Name</label>
-    <input type="text" class="form-control" name="username" placeholder="" />
+    <input type="text" class="form-control" name="username" placeholder="{{ cardiff|get_d_value:"user.name" }}" />
 </div>
 <div class="col-xs-6">
     <label>User Email</label>
-    <input type="text" class="form-control" name="useremail" placeholder="" />
+    <input type="text" class="form-control" name="useremail" placeholder="{{ cardiff|get_d_value:"user.email" }}" />
 </div>
     
