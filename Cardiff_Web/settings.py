@@ -64,7 +64,8 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
             ],
             'libraries':{
-                'get_d_value': 'Cardiff_Web.templatetags.get_d_value'
+                'get_d_value': 'Cardiff_Web.templatetags.get_d_value',
+                'subtract': 'Cardiff_Web.templatetags.subtract'
             },
         },
     },
