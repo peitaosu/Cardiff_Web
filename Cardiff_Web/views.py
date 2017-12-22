@@ -78,6 +78,15 @@ def explore(request):
     context = {}
     if is_set(cardiff.settings["user.name"]):
         context["signed"] = cardiff.settings["user.name"]
+    current_repo = cardiff.settings["repo"]["current"].split("/")[-1]
+    other_repos = list( o_repo.split("/")[-1] for o_repo in cardiff.settings["repo"]["others"])
+    repo_list = []
+    repo_list.append(current_repo)
+    repo_list.extend(other_repos)
+    new_repo_list = zip(repo_list[::2], repo_list[1::2])
+    if len(repo_list) % 2:
+        new_repo_list.append((repo_list[-1], None))
+    context["repo_list"] = new_repo_list
     return render(request, "explore.html", context)
 
 def search(request):

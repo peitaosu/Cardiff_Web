@@ -12,55 +12,30 @@
 
         <div class="explore">
             <div class="row">
+                {% for repo_1, repo_2 in repo_list %}                    
                 <div class="col-md-6">
                     <div class="jumbotron">
                         <div class="jumbotron-photo">
                             <img src="http://bootflat.github.io/img/Jumbotron.jpg">
                         </div>
                         <div class="jumbotron-contents">
-                            <h1>Repository 1</h1>
+                            <a href="/repo?switch={{ repo_1 }}"><h1>{{ repo_1 }}</h1></a>
                         </div>
                     </div>
+                </div>
+                {% if repo_2 != None %}
+                <div class="col-md-6">
                     <div class="jumbotron">
                         <div class="jumbotron-photo">
                             <img src="http://bootflat.github.io/img/Jumbotron.jpg">
                         </div>
                         <div class="jumbotron-contents">
-                            <h1>Repository 3</h1>
+                            <a href="/repo?switch={{ repo_2 }}"><h1>{{ repo_2 }}</h1></a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="jumbotron">
-                        <div id="carousel-repository-generic" class="carousel slide" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#carousel-repository-generic" data-slide-to="0" class=""></li>
-                                <li data-target="#carousel-repository-generic" data-slide-to="1" class="active"></li>
-                                <li data-target="#carousel-repository-generic" data-slide-to="2" class=""></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <div class="item">
-                                    <img src="http://bootflat.github.io/img/slider1.jpg">
-                                </div>
-                                <div class="item active">
-                                    <img src="http://bootflat.github.io/img/slider2.jpg">
-                                </div>
-                                <div class="item">
-                                    <img src="http://bootflat.github.io/img/slider3.jpg">
-                                </div>
-                            </div>
-                            <a class="left carousel-control" href="#carousel-repository-generic" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#carousel-repository-generic" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        </div>
-                        <div class="jumbotron-contents">
-                            <h1>Repository 2</h1>
-                        </div>
-                    </div>
-                </div>
+                {% endif %}
+                {% endfor %}
             </div>
         </div>
 
