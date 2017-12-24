@@ -20,8 +20,20 @@ Cardiff Web is the web-based user interface for [Cardiff](https://github.com/pei
     - Introduction
     - License
 
-## Plan to Support
+## Working In Progress
 * Repository
+    - Branches
+    - Commits
+    - Explore Repositories
+* Settings
+    - Cardiff Setting
+    - Cardiff Web Setting
+    - Personal Setting
+    - Developer Setting
+
+## Plan to Support
+* Search Content
+    - Repositories
     - Branches
     - Commits
 * Diff
