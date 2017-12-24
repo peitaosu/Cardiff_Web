@@ -10,7 +10,8 @@
         <tbody>
             {% for log_item in commit_logs %}
             <tr>
-                <td class="text-center"><code class="text-primary"># {{ forloop.counter }}</code></td>
+                {% load subtract %}
+                <td class="text-center"><a href="/view?diff={{ changed_file }}&before={{ forloop.counter|subtract:1 }}&after={{ forloop.counter }}"><code class="text-primary"># {{ forloop.counter }}</code></a></td>
                 <td>{{ log_item.4 }}</td>
             </tr>
             {% endfor %}
