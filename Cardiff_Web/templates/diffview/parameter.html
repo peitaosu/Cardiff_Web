@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+    <div class="panel-heading">Parameter Diff</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="text-center">Parameter</th>
+                <th class="text-center">Before</th>
+                <th class="text-center">After</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key, value in parameter_diff.items %}
+            <tr class="text-center">
+                <td>{{ key }}</td>
+                <td>{{ value.before }}</td>
+                <td>{{ value.after }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
