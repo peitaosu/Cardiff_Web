@@ -12,8 +12,13 @@
             {% for key, value in parameter_diff.items %}
             <tr class="text-center">
                 <td>{{ key }}</td>
+                {% if value.before != value.after %}
+                <td class="text-danger">{{ value.before }}</td>
+                <td class="text-success">{{ value.after }}</td>
+                {% else %}
                 <td>{{ value.before }}</td>
                 <td>{{ value.after }}</td>
+                {% endif %}
             </tr>
             {% endfor %}
         </tbody>
