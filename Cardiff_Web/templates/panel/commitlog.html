@@ -3,7 +3,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Version</th>
+                <th class="text-center">Version</th>
                 <th>Message</th>
             </tr>
         </thead>
@@ -11,8 +11,8 @@
             {% for log_item in commit_logs %}
             <tr>
                 {% load subtract %}
-                <td class="text-center"><a href="/view?diff={{ changed_file }}&before={{ forloop.counter|subtract:1 }}&after={{ forloop.counter }}"><code class="text-primary"># {{ forloop.counter }}</code></a></td>
-                <td>{{ log_item.4 }}</td>
+                <td class="text-center"><a href="/view?diff={{ log_item.5.items.0.0 }}&before={{ forloop.counter|subtract:1 }}&after={{ forloop.counter }}"><code class="text-primary"># {{ forloop.counter }}</code></a></td>
+                <td>{{ log_item.1 }}</td>
             </tr>
             {% endfor %}
         </tbody>

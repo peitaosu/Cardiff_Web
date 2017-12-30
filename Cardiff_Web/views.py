@@ -12,7 +12,6 @@ from Cardiff import Cardiff
 cardiff = Cardiff()
 cardiff_settings_path = os.path.join(cardiff_path, "settings.json")
 
-repo_path = os.path.join(".", "repositories")
 temp_path = os.path.join(".", "temp")
 
 def is_set(value):
@@ -193,8 +192,6 @@ def branch(request):
 
 def repo(request):
     context = {}
-    if not os.path.isdir(repo_path):
-        os.mkdir(repo_path)
     context["vcs"] = cardiff.settings["vcs"]
     if not is_set(cardiff.settings["user.name"]):
         context["name_set"] = False
@@ -208,14 +205,15 @@ def repo(request):
     if not is_set(cardiff.settings["repo"]["current"]) and request.method != "GET" and "init" not in request.GET:
         context["repo_set"] = False
         return render(request, "prepare.html", context)
-    vcs = cardiff.setup_vcs()
+    if is_set(cardiff.settings["repo"]["current"]):
+        vcs = cardiff.setup_vcs()
     if request.method == "GET":
         if "init" in request.GET:
             if "username" in request.GET:
                 cardiff.settings["user.name"] = request.GET["username"]
             if "useremail" in request.GET:
                 cardiff.settings["user.email"] = request.GET["useremail"]
-            initial_succeed = cardiff.exec_cmd(["init", os.path.join(repo_path, request.GET["init"])])
+            initial_succeed = cardiff.exec_cmd(["init", request.GET["init"]])
             if not initial_succeed:
                 context["initial_failed"] = True
                 context["initial_info"] = {
@@ -226,7 +224,7 @@ def repo(request):
                 return render(request, "alert.html", context)
             save()
         if "switch" in request.GET:
-            repo_to_switch = os.path.join(repo_path, request.GET["switch"])
+            repo_to_switch = request.GET["switch"]
             cardiff.exec_cmd(["repo", repo_to_switch])
             save()
         vcs = cardiff.setup_vcs()
@@ -249,5 +247,5 @@ def repo(request):
     context["other_repo"] = list( o_repo.split("/")[-1] for o_repo in cardiff.settings["repo"]["others"])
     context["current_branch"] = cardiff.vcs_current_branch
     context["other_branches"] = cardiff.vcs_branches["other"]
-    context["commit_logs"] = cardiff.vcs.log()
+    context["commit_logs"] = reversed(cardiff.vcs.get_commits())
     return render(request, "repo.html", context)
