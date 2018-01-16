@@ -1,1 +1,5 @@
+# Cardiff Web
 Django==1.11.2
+
+# Cardiff
+-r Cardiff/requirements.txt
