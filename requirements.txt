@@ -1,5 +1,5 @@
 # Cardiff Web
-Django==1.11.2
+Django>=1.11.19
 
 # Cardiff
 -r Cardiff/requirements.txt
